@@ -13,6 +13,9 @@ import os
 loaders=CSVLoader('personal_posts.csv', encoding='utf-8')
 docs=loaders.load()
 
+openai_key = st.secrets["openai"]["openai_api_key"]
+os.environ["OPENAI_API_KEY"] = st.secrets["openai"]["openai_api_key"]
+
 def get_text_chunks(docs):
     text_splitter=CharacterTextSplitter(separator="\n", chunk_size=1000, chunk_overlap=200, length_function=len)
     text_chunks=text_splitter.split_documents(docs)
