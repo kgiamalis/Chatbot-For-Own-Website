@@ -67,7 +67,7 @@ def main():
         st.session_state.chat_history=None
     user_question=st.text_input("Ask your question")
     if user_question:
-        handle_user_input(full_query)
+        handle_user_input(user_question)
     with st.sidebar:
         st.title("LLM Chatapp using LangChain - Press Start to begin.")
         st.markdown('''
