@@ -8,7 +8,6 @@ from langchain.vectorstores import FAISS
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 from HTMLTemplate import css, user_template, bot_template
-from dotenv import load_dotenv
 import os
 
 #Load Data with LangChain CSVLoader
