@@ -53,7 +53,6 @@ def handle_user_input(user_question):
 
 #Main Function
 def main():
-    load_dotenv()
     st.set_page_config(page_title="kgiamalis.co chatbot - press start button to initiate", page_icon=":chatbot:")
     st.write(css, unsafe_allow_html=True)
     st.header("kgiamalis.co chatbot 💬")
