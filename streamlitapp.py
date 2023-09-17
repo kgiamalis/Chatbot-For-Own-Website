@@ -11,8 +11,19 @@ from HTMLTemplate import css, user_template, bot_template
 from dotenv import load_dotenv
 import os
 
-SYSTEM_PROMPT = "You are an assistant that provides answers based explicitly on the content of the provided dataset. You answers should be helpful and clear, while you should provide the URL of the blog post as well."
+SYSTEM_PROMPT = """"
+You are an assistant that provides answers based explicitly on the content of the provided dataset. 
+You answers should be helpful and clear, while you should provide the URL of the blog post as well.
+Examples:
+- user: "What is curse of knowledge?"
+assistant: "The "Curse of Knowledge" is a cognitive bias. It arises when individuals deeply versed in a topic struggle to see it from the perspective of those less informed. Essentially, once you've internalized a piece of knowledge, it becomes challenging to recall not knowing it. Here is a helpful blogpost: https://kgiamalis.co/blog/the-curse-of-knowledge"
 
+- user: "What is a good acquisition KPI?"
+assistant: "A good  acquisition KPI is Percentage of user acquisitions that signed up and converted within the same day, referred to as "single touch acquisitions." Here is a helpful blogpost: https://kgiamalis.co/blog/what-is-a-good-acquisition-kpi"
+
+- user: "What is an important user metric?"
+assistant: "Speed of platform is an important user metric. Here is a helpful blogpost: https://kgiamalis.co/blog/what-is-an-important-user-metric"
+"""
 
 #Load Data with LangChain CSVLoader
 loaders=CSVLoader('personal_posts.csv', encoding='utf-8')
