@@ -67,10 +67,10 @@ def main():
     with st.sidebar:
         st.title("LLM Chatapp using LangChain - Press Start to begin.")
         st.markdown('''
-        This app is an LLM powered Chatbot built using:
-        - [Streamlit](https://streamlit.io/) 
-        - [OpenAI](https://platform.openai.com/docs/models) LLM
-        - [LangChain](https://python.langchain.com/)
+        This app is an LLM powered Chatbot that answer questions based on kgiamalis.co blogposts.
+        Here are some questions you can ask:
+        - What is curse of knowledge?
+        - What is a good user acquisition KPI?
         ''')
 
         if st.button("Start"):
