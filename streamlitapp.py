@@ -67,8 +67,8 @@ def main():
     with st.sidebar:
         st.title("LLM Chatapp using LangChain - Press Start to begin.")
         st.markdown('''
-        This app is an LLM powered Chatbot that answer questions based on kgiamalis.co blogposts.
-        Here are some questions you can ask:
+        This app is an LLM powered Chatbot that answer questions based on kgiamalis.co
+        Here are some questions that you can ask:
         - What is curse of knowledge?
         - What is a good user acquisition KPI?
         ''')
