@@ -1,3 +1,4 @@
+#Import Libraries
 import streamlit as st
 from langchain.document_loaders import CSVLoader
 from langchain.text_splitter import CharacterTextSplitter
@@ -10,31 +11,41 @@ from HTMLTemplate import css, user_template, bot_template
 from dotenv import load_dotenv
 import os
 
+SYSTEM_PROMPT = "You are an assistant that provides answers based explicitly on the content of the provided dataset. You answers should be helpful and clear, while you should provide the URL of the blog post as well."
+
+
+#Load Data with LangChain CSVLoader
 loaders=CSVLoader('personal_posts.csv', encoding='utf-8')
 docs=loaders.load()
 
+#Set OpenAI API Key
 openai_key = st.secrets["openai"]["openai_api_key"]
 os.environ["OPENAI_API_KEY"] = st.secrets["openai"]["openai_api_key"]
 
+#Prepare data for embedding
 def get_text_chunks(docs):
     text_splitter=CharacterTextSplitter(separator="\n", chunk_size=1000, chunk_overlap=200, length_function=len)
     text_chunks=text_splitter.split_documents(docs)
     return text_chunks
 
+#Embed the data in FAISS
 def get_vector_store(text_chunks):
     embeddings=OpenAIEmbeddings()
     vectorstore=FAISS.from_documents(text_chunks, embeddings)
     return vectorstore
 
+#Create a Conversation Chain
 def get_conversation_chain(vectorstore):
     llm=ChatOpenAI(temperature=0.0)
     memory=ConversationBufferMemory(memory_key='chat_history', return_messages=True)
     conversation_chain=ConversationalRetrievalChain.from_llm(llm=llm, retriever=vectorstore.as_retriever(), memory=memory)
     return conversation_chain
 
+#Handle User Input
 def handle_user_input(user_question):
+    full_query = f"{SYSTEM_PROMPT} {user_question}"
     if st.session_state.conversation:
-        response = st.session_state.conversation({'question': user_question})
+        response = st.session_state.conversation({'question': full_query})
         st.session_state.chat_history = response['chat_history']
         for i, message in enumerate(st.session_state.chat_history):
             if i % 2 == 0:
@@ -44,6 +55,7 @@ def handle_user_input(user_question):
     else:
         st.warning("Please press 'Start' before asking a question.")
 
+#Main Function
 def main():
     load_dotenv()
     st.set_page_config(page_title="kgiamalis.co chatbot - press start button to initiate", page_icon=":chatbot:")
