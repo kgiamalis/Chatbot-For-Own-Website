@@ -47,7 +47,7 @@ def handle_user_input(user_question):
     """
     full_conversation = [{'role': 'system', 'content': system_prompt}, {'role': 'user', 'content': user_question}]
     if st.session_state.conversation:
-        response = st.session_state.conversation({full_conversation})
+        response = st.session_state.conversation(full_conversation)
         st.session_state.chat_history = response['chat_history']
         for i, message in enumerate(st.session_state.chat_history):
             if i % 2 == 0:
