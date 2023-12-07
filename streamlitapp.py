@@ -69,6 +69,8 @@ def main():
         Here are some questions that you can ask:
         - What is curse of knowledge?
         - What is a good user acquisition KPI?
+                    
+        Please note that this chatbot is not fully updated with my latest posts.
         ''')
 
         if st.button("Start"):
