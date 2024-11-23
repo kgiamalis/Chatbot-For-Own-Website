@@ -3,5 +3,5 @@ openai
 faiss-cpu
 python-dotenv
 tiktoken
-pip install -U langchain-community
+langchain-community
 streamlit
